@@ -1,0 +1,15 @@
+[Unit]
+Description=llmhub - routes clients to tunneled llama-servers
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/llmhub.env
+ExecStart=/usr/local/bin/llmhub
+Restart=always
+RestartSec=2
+StateDirectory=llmhub
+# hub binds loopback only; Caddy is the public face
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
