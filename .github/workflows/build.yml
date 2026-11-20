@@ -49,10 +49,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifact
+      - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: llmhub-linux-amd64
+          path: .
+
+      - name: Verify release asset
+        run: |
+          ls -lh llmhub-linux-amd64
+          file llmhub-linux-amd64
+          chmod +x llmhub-linux-amd64
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
